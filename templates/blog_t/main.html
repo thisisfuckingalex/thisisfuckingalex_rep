@@ -1,0 +1,12 @@
+{% extends 'blog_t/base.html' %}
+
+{% block content %}
+    {% for main in main_list %}
+        <center><h1>{{ main.greeting }}</h1>
+            <p>{{ main.about_pr }}</p>
+        </center>
+    {% endfor %}
+
+        <p>Посещений {{ num_visits }}</p>
+
+{% endblock %}

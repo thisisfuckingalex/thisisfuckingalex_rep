@@ -1,0 +1,10 @@
+{% extends 'blog_t/base.html' %}
+
+
+
+{% block content %}
+{% for category in categories  %}
+    <h3><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></h3>
+    <p>{{ category.description }}</p>
+{% endfor %}
+{% endblock %}
