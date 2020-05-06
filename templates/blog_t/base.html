@@ -45,12 +45,17 @@
             </li>
         {% endif %}
 
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'post_list' %}">Посты</a>
-      </li>
-{#      <li class="nav-item">#}
-{#        <a class="nav-link" href=></a>#}
-{#      </li>#}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'post_list' %}">Посты</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href={% url 'post_creation' %}>Предложить пост</a>
+         </li>
+{#        {% if user.is_superuser %}#}
+{#            <li class="nav-item">#}
+{#                <a class="nav-link" href={% url 'suggested_category_list' %}>Предложенные посты</a>#}
+{#            </li>#}
+{#        {% endif %}#}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Категории

@@ -5,40 +5,47 @@
 
 
 {% block content %}
-<center><h3>{{ post.author }}</h3>
-<br>
-<h2>{{ post.title }}</h2>
-{{ post.description }}
-    <br>
-    <p>{{ post.text }}</p>
-</center>
-    <p>Категория - <b>{{ post.category }}</b>, {{ post.created_date }}</p>
+{#    {% if post %}#}
+        <center><h3>{{ post.author }}</h3>
+        <br>
+        <h2>{{ post.title }}</h2>
+        {{ post.description }}
+            <br>
+            <br>
+            <p>{{ post.text }}</p>
+        </center>
+            <p>Категория - <b>{{ post.category }}</b>, {{ post.created_date }}</p>
+        <a class="btn btn-default" href="{% url 'post_edit' slug=post.slug %}">Редактировать пост</a>
+            <svg class="bi bi-chat-square-dots" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M14 1H2a1 1 0 00-1 1v8a1 1 0 001 1h2.5a2 2 0 011.6.8L8 14.333 9.9
+                11.8a2 2 0 011.6-.8H14a1 1 0 001-1V2a1 1 0 00-1-1zM2 0a2 2 0 00-2 2v8a2 2 0 002 2h2.5a1 1 0 01.8.4l1.9
+                2.533a1 1 0 001.6 0l1.9-2.533a1 1 0 01.8-.4H14a2 2 0 002-2V2a2 2 0 00-2-2H2z" clip-rule="evenodd"></path>
+                <path d="M5 6a1 1 0 11-2 0 1 1 0 012 0zm4 0a1 1 0 11-2 0 1 1 0 012 0zm4 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
 
-    <svg class="bi bi-chat-square-dots" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-         xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" d="M14 1H2a1 1 0 00-1 1v8a1 1 0 001 1h2.5a2 2 0 011.6.8L8 14.333 9.9
-        11.8a2 2 0 011.6-.8H14a1 1 0 001-1V2a1 1 0 00-1-1zM2 0a2 2 0 00-2 2v8a2 2 0 002 2h2.5a1 1 0 01.8.4l1.9
-        2.533a1 1 0 001.6 0l1.9-2.533a1 1 0 01.8-.4H14a2 2 0 002-2V2a2 2 0 00-2-2H2z" clip-rule="evenodd"></path>
-        <path d="M5 6a1 1 0 11-2 0 1 1 0 012 0zm4 0a1 1 0 11-2 0 1 1 0 012 0zm4 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
-    </svg> {{ post.get_comments_count }}
+            </svg> {{ post.get_comments_count }}
 
 
-        <h4>Комментарии</h4>
-    {% if user.is_authenticated %}
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Отправить</button>
-        </form>
-    {% else %}
-        <p>Что бы оставить комментарий войдите на сайт</p>
-    {% endif %}
-    <hr>
-    {% for comment in post.comments.all %}
-        Пользователь - {{ comment.author }}<br>
-        {{ comment.text }} <br>
-        Добавлен - {{ comment.created_date }}<br><br>
-    {% endfor %}
+                <h4>Комментарии</h4>
+            {% if user.is_authenticated %}
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Отправить</button>
+                </form>
+            {% else %}
+                <p>Что бы оставить комментарий войдите на сайт</p>
+            {% endif %}
+            <hr>
+            {% for comment in post.comments.all %}
+                Пользователь - {{ comment.author }}<br>
+                {{ comment.text }} <br>
+                Добавлен - {{ comment.created_date }}<br><br>
+            {% endfor %}
+{#    {% else %}#}
+{#        <a href="{% url 'account_login' %}">Авторизуйтесь</a> или#}
+{#        <a href="{% url 'account_signup' %}">зарегистриуйтесь</a>, чтобы посмотреть эту статью.#}
+{#    {% endif %}#}
 {% endblock %}
 
 

@@ -1,11 +1,8 @@
 from django.contrib.auth.models import User
-from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.db import models
-from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+from pytils.translit import slugify
 
 
 class Main(models.Model):
@@ -76,11 +73,15 @@ class Post(models.Model):
     def get_comments_count(self):
         return self.comments.count()
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title, )
+        super(Post, self).save(*args, **kwargs)
+
     def get_category_template(self):
         return self.category.template
 
     def get_absolute_url(self):
-        return reverse('post_detail_url', kwargs={'category': self.category.slug, 'slug': self.slug})
+        return reverse('post_detail', kwargs={'category': self.category.slug, 'post_slug': self.slug})
 
     def __str__(self):
         return self.title
@@ -104,4 +105,4 @@ class Comment(models.Model):
     moderation = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ('created_date', )
+        ordering = ('-created_date', )

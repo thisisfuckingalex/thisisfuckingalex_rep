@@ -1,0 +1,14 @@
+{% extends 'blog_t/base.html' %}
+
+{% block content %}
+    {% for posst in sug_post %}
+        <center><h3>{{ post.author }}</h3>
+            <br>
+            <h2>{{ post.title }}</h2>
+            {{ post.description }}
+            <br>
+            <p>{{ post.text }}</p>
+            </center>
+        <p>Категория - <b>{{ post.category }}</b>, {{ post.created_date }}</p>
+    {% endfor %}
+{% endblock %}

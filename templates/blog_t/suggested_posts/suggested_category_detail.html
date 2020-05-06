@@ -1,0 +1,8 @@
+{% extends 'blog_t/base.html' %}
+
+
+{% block content %}
+{% for sug_posts in suggested_category_detail %}
+    <h3><a href="{{ sug_posts.slug }}">{{ sug_posts.title }}</a></h3>
+{% endfor %}
+{% endblock %}

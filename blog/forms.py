@@ -1,6 +1,6 @@
 from django import forms
-
-from .models import Comment
+from django.utils.text import slugify
+from .models import Comment, Post
 
 
 class CommentForm(forms.ModelForm):
@@ -8,3 +8,10 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ("text", )
+
+
+class PostForm(forms.ModelForm):
+    """Класс формы для постов"""
+    class Meta:
+        model = Post
+        fields = (slugify('title'), 'description', 'text', 'category')
